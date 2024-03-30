@@ -1,73 +1,37 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Rec's Friends and Food Project
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The Restaurant Reservation API provides an easy-to-use interface for managing reservations. Built with NestJS, it offers endpoints for creating, finding, and deleting reservations efficiently. This guide will help you set up the API and detail how to use its endpoints.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## API Endpoints
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Create a Reservation
 
-## Installation
+- **Method:** POST
+- **Endpoint:** `/reservations`
+- **Description:** Creates a new reservation with the provided details in the body.
+- **Body:**
+  - `tableId`: number; The ID of the table being reserved.
+  - `startTime`: Date; The start time of the reservation.
+  - `endTime`: Date; The end time of the reservation.
+  - `dinerIds`: number[]; An array of diner IDs included in the reservation. 
 
-```bash
-$ npm install
-```
+### Find Restaurants for Diners
 
-## Running the app
+- **Method:** GET
+- **Endpoint:** `/reservations/findForDiners`
+- **Description:** Returns a list of available restaurants for a given number of diners at a specified time, based on the provided query parameters.
+- **Params:**
+  - `dinerIds`: A comma-separated list of diner IDs. These are the IDs of the diners who will be dining together.
+  - `dinersCount`: The number of diners. This is used to ensure that the restaurant has enough capacity.
+  - `desiredTime`: The desired reservation time. This is used to check the restaurant's availability at this time.
 
-```bash
-# development
-$ npm run start
 
-# watch mode
-$ npm run start:dev
+### Delete a Reservation
 
-# production mode
-$ npm run start:prod
-```
+- **Method:** DELETE
+- **Endpoint:** `/reservations/:reservationId`
+- **Description:** Deletes the specified reservation.
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
